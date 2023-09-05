@@ -1,0 +1,26 @@
+{
+  "name": "shared-types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist esm",
+    "prebuild": "npm run clean",
+    "build:cjs": "tsc --outDir dist --module commonjs",
+    "build:esm": "tsc --outDir esm --target es2018",
+    "build": "npm run build:esm && npm run build:cjs"
+  },
+  "files": [
+    "dist",
+    "esm",
+    "src"
+  ],
+  "module": "esm/index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@sinclair/typebox": "^0.31.7",
+    "typescript": "^4.9.5"
+  }
+}
