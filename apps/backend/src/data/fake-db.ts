@@ -1,6 +1,9 @@
-import type { QuestionType, QuestionFilter, QuestionInputType } from "shared-types";
-import { v4 as uuidv4 } from 'uuid';
-
+import type {
+  QuestionType,
+  QuestionFilter,
+  QuestionInputType,
+} from "shared-types";
+import { v4 as uuidv4 } from "uuid";
 
 export class FakeDB {
   constructor(private db: QuestionType[] = []) {}
@@ -12,13 +15,16 @@ export class FakeDB {
     const keys = Object.keys(filter);
     return this.db.filter((question) => {
       for (const key of keys) {
-        if (
-          question[key as keyof QuestionType] !==
-          filter[key as keyof QuestionFilter]
-        )
-          return false;
+        const values = filter[key as keyof QuestionFilter] || [];
+        for (const value of values) {
+          if (
+            question[key as keyof QuestionType] ===
+            value
+          )
+            return true;
+        }
       }
-      return true;
+      return false;
     });
   }
 
@@ -26,8 +32,8 @@ export class FakeDB {
     const newQuestion = {
       id: uuidv4(),
       ...addend,
-    }
+    };
     this.db.push(newQuestion);
-    return newQuestion
+    return newQuestion;
   }
 }

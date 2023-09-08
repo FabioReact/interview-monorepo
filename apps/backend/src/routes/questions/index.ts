@@ -1,6 +1,5 @@
 import { FastifyPluginAsync } from "fastify";
 import {
-  Difficulty,
   Question,
   QuestionInput,
   QuestionType,
@@ -9,13 +8,19 @@ import {
 
 interface IQuerystring {
   language: string;
-  difficulty: Difficulty;
+  difficulty: string;
 }
 
 const root: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.get<{ Querystring: IQuerystring }>("/", async (request) => {
-    if (Object.keys(request.query).length) {
-      return fastify.db.getByFilter(request.query);
+    const filterKeys = Object.keys(request.query)
+    if (filterKeys.length) {
+      const query: any = {}
+      filterKeys.forEach(k => {
+        query[k] = request.query[k as keyof IQuerystring].split(',');
+      });
+      console.log(query)
+      return fastify.db.getByFilter(query);
     }
     return fastify.db.getAll();
   });
