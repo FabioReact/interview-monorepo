@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { router } from "./Routes";
 import { RouterProvider } from 'react-router-dom';
 

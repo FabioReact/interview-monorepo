@@ -8,19 +8,21 @@ const DifficultyLabel = ({ difficulty }: DifficultyLabelProps) => {
   let specificStyle
   switch (difficulty) {
     case Difficulty.EASY:
-      specificStyle = 'bg-lime-50 border-lime-700 text-lime-700'
+      specificStyle = 'bg-lime-100 border-lime-800 text-lime-800'
       break;
     case Difficulty.MODERATE:
-      specificStyle = 'bg-orange-50 border-orange-600 text-orange-600'
+      specificStyle = 'bg-orange-100 border-orange-600 text-orange-600'
       break;
     case Difficulty.EXPERT:
-      specificStyle = 'bg-red-50 border-red-700 text-red-700'
+      specificStyle = 'bg-red-100 border-red-800 text-red-800'
       break;
     default:
       break;
   }
   return (
-    <div className={`rounded-xl px-2 border capitalize text-sm ${specificStyle}`}>{difficulty}</div>
+    <div className={`w-32 capitalize`}>
+      <span className={`rounded px-2.5 py-0.5 border capitalize text-sm ${specificStyle}`}>{difficulty}</span>
+    </div>
   )
 }
 
@@ -32,11 +34,12 @@ type QuestionProps = {
 }
 
 const Question = ({ difficulty, language, text, bg }: QuestionProps) => {
-  console.log(bg)
   return (
     <div className="flex">
       <DifficultyLabel difficulty={difficulty} />
-      <span className={`rounded-xl px-2 border capitalize text-sm text-white ${bg}`}>{language}</span>
+      <div className="w-32">
+        <span className={`rounded-full px-2.5 py-0.5 border capitalize text-sm text-white ${bg}`}>{language}</span>
+      </div>
       <p>{text}</p>
     </div>
   )

@@ -2,9 +2,13 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <div>
-      <nav>CodeWorks</nav>
-      <Outlet />
+    <div className='container mx-auto'>
+      <nav>
+        CodeWorks
+      </nav>
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };

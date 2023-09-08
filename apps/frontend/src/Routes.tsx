@@ -6,6 +6,9 @@ import {
 } from "react-router-dom";
 import Layout from "./hoc/Layout";
 import QuestionsPage, { loader } from "./pages/Questions";
+// import { lazy } from "react";
+
+// const QuestionsPage = lazy(() => import('./pages/Questions'))
 
 function ErrorBoundary() {
   const error = useRouteError();

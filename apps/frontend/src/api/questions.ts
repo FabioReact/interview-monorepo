@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getQuestions = async (params?: {
   language?: string;
-  difficulty?: Difficulty;
+  difficulty?: string;
 }) => {
   try {
     const response = await axios.get('http://localhost:3000/questions', {

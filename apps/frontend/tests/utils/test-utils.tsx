@@ -4,6 +4,7 @@ import {
   RouteObject,
   RouterProvider,
   createMemoryRouter,
+  useRouteError,
 } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { isValidElement } from "react";
@@ -11,6 +12,16 @@ import { isValidElement } from "react";
 afterEach(() => {
   cleanup();
 });
+
+function ErrorBoundary() {
+  const error = useRouteError();
+  return (
+    <div>
+      <h1>Error Conponent</h1>
+      <pre>{JSON.stringify(error, null, 2)}</pre>
+    </div>
+  );
+}
 
 export function renderWithRouter(
   children: React.ReactElement | RouteObject,
@@ -25,6 +36,7 @@ export function renderWithRouter(
         path: '/',
         element: children,
         loader: options?.loader,
+        errorElement: <ErrorBoundary />
       }
     : (children as RouteObject);
 
